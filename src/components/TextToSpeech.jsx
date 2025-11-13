@@ -12,6 +12,17 @@ const TextToSpeech = () => {
   const [volume, setVolume] = useState(1)
   const synthRef = useRef(window.speechSynthesis)
 
+  // Helper function to detect gender from voice name
+  const getVoiceGender = (voiceName) => {
+    const nameLower = voiceName.toLowerCase()
+    const femaleKeywords = ['female', 'woman', 'girl', 'zira', 'susan', 'karen', 'moira', 'tessa', 'samantha', 'victoria', 'fiona', 'amelie', 'anna', 'carmit', 'damayanti', 'ioana', 'jessica', 'joana', 'kanya', 'kyoko', 'laura', 'lekha', 'luciana', 'mariska', 'mei-jia', 'melina', 'milena', 'mónica', 'nora', 'paulina', 'satu', 'sin-ji', 'tessa', 'ting-ting', 'veena', 'yelda', 'zosia', 'ellen', 'sandy', 'sara']
+    const maleKeywords = ['male', 'man', 'boy', 'david', 'mark', 'george', 'daniel', 'james', 'alex', 'thomas', 'xander', 'diego', 'lee', 'nathan']
+    
+    if (femaleKeywords.some(keyword => nameLower.includes(keyword))) return 'female'
+    if (maleKeywords.some(keyword => nameLower.includes(keyword))) return 'male'
+    return 'unknown'
+  }
+
   useEffect(() => {
     const loadVoices = () => {
       const availableVoices = synthRef.current.getVoices()
@@ -130,12 +141,32 @@ const TextToSpeech = () => {
                 value={selectedVoice}
                 onChange={(e) => setSelectedVoice(e.target.value)}
               >
-                {voices.map((voice, index) => (
-                  <option key={index} value={voice.name}>
-                    {voice.name} ({voice.lang})
-                  </option>
-                ))}
+                {voices.map((voice, index) => {
+                  const gender = getVoiceGender(voice.name)
+                  const genderIcon = gender === 'female' ? '👩' : gender === 'male' ? '👨' : '🎤'
+                  return (
+                    <option key={index} value={voice.name}>
+                      {genderIcon} {voice.name} ({voice.lang})
+                    </option>
+                  )
+                })}
               </select>
+            </div>
+
+            {/* Voice Gender Indicators */}
+            <div className="voice-gender-info">
+              <div className="gender-badge female">
+                <span>👩</span>
+                <span>Female Voices</span>
+              </div>
+              <div className="gender-badge male">
+                <span>👨</span>
+                <span>Male Voices</span>
+              </div>
+              <div className="gender-badge neutral">
+                <span>🎤</span>
+                <span>Other Voices</span>
+              </div>
             </div>
           </div>
 

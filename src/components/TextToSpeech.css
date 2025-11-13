@@ -226,6 +226,50 @@
   font-weight: 500;
 }
 
+/* Voice Gender Indicators */
+.voice-gender-info {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.gender-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  flex: 1;
+  min-width: fit-content;
+  justify-content: center;
+}
+
+.gender-badge.female {
+  background: rgba(236, 72, 153, 0.25);
+  border: 1px solid rgba(236, 72, 153, 0.4);
+  color: #fff;
+}
+
+.gender-badge.male {
+  background: rgba(59, 130, 246, 0.25);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #fff;
+}
+
+.gender-badge.neutral {
+  background: rgba(168, 85, 247, 0.25);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #fff;
+}
+
+.gender-badge span:first-child {
+  font-size: 16px;
+}
+
 /* Wrapper that provides a consistent custom arrow */
 .select-wrap {
   position: relative;
