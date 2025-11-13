@@ -110,7 +110,7 @@ const TextToSpeech = () => {
             </label>
             <textarea
               className="text-input"
-              placeholder="Type or paste your text here..."
+              placeholder="Enter your message or paste any text to convert into natural speech..."
               value={text}
               onChange={(e) => setText(e.target.value)}
               rows={6}
@@ -121,19 +121,22 @@ const TextToSpeech = () => {
           <div className="control-section">
             <label className="section-label">
               <span className="label-icon">🎧</span>
-              <span>Select Voice</span>
+              <span>Voice Selection</span>
+              <span className="voice-count">{voices.length} voices</span>
             </label>
-            <select
-              className="voice-select"
-              value={selectedVoice}
-              onChange={(e) => setSelectedVoice(e.target.value)}
-            >
-              {voices.map((voice, index) => (
-                <option key={index} value={voice.name}>
-                  {voice.name} ({voice.lang})
-                </option>
-              ))}
-            </select>
+            <div className="select-wrap">
+              <select
+                className="voice-select"
+                value={selectedVoice}
+                onChange={(e) => setSelectedVoice(e.target.value)}
+              >
+                {voices.map((voice, index) => (
+                  <option key={index} value={voice.name}>
+                    {voice.name} ({voice.lang})
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           {/* Advanced Controls */}
